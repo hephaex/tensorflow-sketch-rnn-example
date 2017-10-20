@@ -1,0 +1,10 @@
+[Unit]
+Description=Sketch-RNN demo
+After=syslog.target network.target auditd.service
+
+[Service]
+ExecStart=/opt/sketch_demo/app.py
+ExecStop=/bin/kill -TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target
