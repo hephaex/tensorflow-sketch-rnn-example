@@ -93,7 +93,7 @@ class SketchGenerator(object):
   def encode(self, image):
 
     def _compress_stroke(strokes):
-      result = [[x/15.0, y/15.0, 0] for [x, y] in rdp(strokes, epsilon=1.0)]
+      result = [[x/10.0, y/10.0, 0] for [x, y] in rdp(strokes, epsilon=1.0)]
       result[-1][2] = 1
       return result
 
