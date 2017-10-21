@@ -3,7 +3,7 @@
 ## Quick Install
 
 Launch GCE instance.
-- 2vCPU (7.5G Memory)
+- 2vCPU, 8G Memory
 - Debian GNU/Linux 9 (stretch)
 - Allow HTTP traffic
 
