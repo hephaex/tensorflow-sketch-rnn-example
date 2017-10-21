@@ -11,16 +11,31 @@
   <h1>Sketch Kids (Sketch-RNN demo)</h1>
   <table>
     <td style="border-style: none;">
-      <div style="border: solid 2px #666; width: 304px; height: 204px;">
-        <canvas id="canvas" width="300" height="200"></canvas>
+      <div style="border: solid 2px #666; width: 254px; height: 254px;">
+        <canvas id="canvas" width="250" height="250"></canvas>
       </div>
     </td>
     <td style="border-style: none;">
       <button onclick="clear_value()">Clear</button>
-      <button onclick="send_strokes()">Submit</button>
+      <button id="submit" onclick="send_strokes()">Submit</button>
+  <p>
+  <table>
+    <tr>
+    <td><button onclick="set_room(1)">Class Room #1</button></td>
+    <td><button onclick="set_room(2)">Class Room #2</button></td>
+    </tr>
+    <tr>
+    <td><button onclick="set_room(3)">Class Room #3</button></td>
+    <td><button onclick="set_room(4)">Class Room #4</button></td>
+    </tr>
+  </table>
     </td>
   </table>
 
+  <p>
+  <div id="note">
+Note: The kids in this class love cats and buses! They would never draw other things.
+  </div>
   <p>
   <table border="1" width="600"><tr><td>Your Sample</td></tr>
     <tr><td align="center"><img id="original" width="120" src="{{url_for('static', filename='cat.png')}}"></td></tr>
@@ -34,11 +49,9 @@
     </tr>
   </table>
   <p>
-  <div>
-    Note: These kids really love cats and buses! They would never draw other things.
-  </div>
 
   <script language="javascript" type="text/javascript">
+    var model = 'catbus';
     var pen_down = 0;
     var pre_x = 0, pre_y = 0;
     var strokes = [];
@@ -76,22 +89,49 @@
       strokes = [];
     }
 
+    function set_room(id){
+      var target = document.getElementById("submit");
+      if (id == 1){
+        model = 'catbus';
+        var txt = "Note: The kids in this class love cats and buses! They would never draw other things."
+        document.getElementById("note").innerHTML = txt;
+      }
+      if (id == 2){
+        model = 'elephantpig';
+        var txt = "Note: The kids in this class love elephants and pigs! They would never draw other things."
+        document.getElementById("note").innerHTML = txt;
+      }
+      if (id == 3){
+        model = 'flamingo';
+        var txt = "Note: The kids in this class really love flamingos!"
+        document.getElementById("note").innerHTML = txt;
+      }
+      if (id == 4){
+        model = 'owl';
+        var txt = "Note: The kids in this class really love owls!"
+        document.getElementById("note").innerHTML = txt;
+      }
+    }
+
     function send_strokes() {
+	document.getElementById("submit").disabled = true;
+        var data = {strokes: strokes, model: model}
         $.ajax({
-          type: 'POST',
-          url: 'post',
-          data: JSON.stringify(strokes),
-          success: function(response) {
-	         var target0 = document.getElementById("original");
-	         var target1 = document.getElementById("kid1");
-	         var target2 = document.getElementById("kid2");
-	         var target3 = document.getElementById("kid3");
-	         target0.src = response.original;
-	         target1.src = response.kid1;
-	         target2.src = response.kid2;
-	         target3.src = response.kid3; },
-	  contentType: "application/json",
-	  dataType: 'json'
+            type: 'POST',
+            url: 'post',
+            data: JSON.stringify(data),
+            success: function(response) {
+                var target0 = document.getElementById("original");
+	        var target1 = document.getElementById("kid1");
+	        var target2 = document.getElementById("kid2");
+	        var target3 = document.getElementById("kid3");
+	        target0.src = response.original;
+	        target1.src = response.kid1;
+	        target2.src = response.kid2;
+	        target3.src = response.kid3;
+	        document.getElementById("submit").disabled = false;},
+	    contentType: "application/json",
+	    dataType: 'json'
         });
     }
   </script>
