@@ -119,7 +119,7 @@ You have to wait around 60secs for the application to finish loading
  the pretrained model graph. After that, you can access the instance's
  static IP address using a web browser. You draw a sample picture
  on the white canvas, and when you submit it, three children (emulated by
- the machine learning model) try to imitate your sample.
+ a machine learning model) try to imitate your sample.
  
  ![](docs/img/screenshot.png)
 
