@@ -1,4 +1,4 @@
-# TensorFlow Sketch-RNN pretrained model demo
+# TensorFlow Sketch-RNN pre-trained model demo
 
 Discrlaimer: This is not an official Google product.
 
