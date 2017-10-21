@@ -166,4 +166,4 @@ if __name__ == '__main__':
     MAX_SEQ_LEN = json.load(config)['max_seq_len']
 
   client = SketchGenerator()
-  app.run(host='127.0.0.1', port=port, debug=True)
+  app.run(host='127.0.0.1', port=port, debug=False)
