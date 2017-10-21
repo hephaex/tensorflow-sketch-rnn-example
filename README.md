@@ -45,3 +45,6 @@ systemctl enable sketch_demo
 systemctl start sketch_demo
 systemctl status sketch_demo
 ```
+
+ ![](docs/img/screenshot.png)
+ 
