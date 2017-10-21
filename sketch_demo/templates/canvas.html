@@ -57,21 +57,21 @@ Note: The kids in this class love cats and buses! They would never draw other th
     var strokes = [];
 
     var canvas = document.getElementById("canvas");
-    canvas.addEventListener("mousemove", function(e){       
+    canvas.addEventListener("mousemove", function(e) {
         if (e.buttons == 1) {
           var ctx = canvas.getContext("2d");
           if (pen_down == 0) {
             strokes.push(e.offsetX, e.offsetY, 0);
             pen_down = 1;
           } else {
-            strokes.push(e.offsetX, e.offsetY, 1);                
+            strokes.push(e.offsetX, e.offsetY, 1);
             ctx.fillStyle = "rgb(0,0,0)";
-            var dx = e.offsetX - pre_x
-            var dy = e.offsetY - pre_y
-            var dist = parseInt(Math.sqrt(dx * dx + dy * dy))
-	    for (i = 0.1; i < 1.1; i = i + 0.1){
+            var dx = e.offsetX - pre_x;
+            var dy = e.offsetY - pre_y;
+            var dist = parseInt(Math.sqrt(dx * dx + dy * dy));
+            for (i = 0.1; i < 1.1; i = i + 0.1) {
               ctx.fillRect(pre_x + dx * i, pre_y + dy * i, 5, 5);
-	    }
+            }
           }
           pre_x = e.offsetX;
           pre_y = e.offsetY;
@@ -81,7 +81,7 @@ Note: The kids in this class love cats and buses! They would never draw other th
         }
     });
 
-    function clear_value(){
+    function clear_value() {
       var ctx = canvas.getContext("2d");
       ctx.fillStyle = "rgb(255,255,255)";
       ctx.fillRect(0, 0, 400, 300);
@@ -89,24 +89,24 @@ Note: The kids in this class love cats and buses! They would never draw other th
       strokes = [];
     }
 
-    function set_room(id){
+    function set_room(id) {
       var target = document.getElementById("submit");
-      if (id == 1){
+      if (id == 1) {
         model = 'catbus';
         var txt = "Note: The kids in this class love cats and buses! They would never draw other things."
         document.getElementById("note").innerHTML = txt;
       }
-      if (id == 2){
+      if (id == 2) {
         model = 'elephantpig';
         var txt = "Note: The kids in this class love elephants and pigs! They would never draw other things."
         document.getElementById("note").innerHTML = txt;
       }
-      if (id == 3){
+      if (id == 3) {
         model = 'flamingo';
         var txt = "Note: The kids in this class really love flamingos!"
         document.getElementById("note").innerHTML = txt;
       }
-      if (id == 4){
+      if (id == 4) {
         model = 'owl';
         var txt = "Note: The kids in this class really love owls!"
         document.getElementById("note").innerHTML = txt;
@@ -114,7 +114,7 @@ Note: The kids in this class love cats and buses! They would never draw other th
     }
 
     function send_strokes() {
-	document.getElementById("submit").disabled = true;
+        document.getElementById("submit").disabled = true;
         var data = {strokes: strokes, model: model}
         $.ajax({
             type: 'POST',
@@ -122,16 +122,18 @@ Note: The kids in this class love cats and buses! They would never draw other th
             data: JSON.stringify(data),
             success: function(response) {
                 var target0 = document.getElementById("original");
-	        var target1 = document.getElementById("kid1");
-	        var target2 = document.getElementById("kid2");
-	        var target3 = document.getElementById("kid3");
-	        target0.src = response.original;
-	        target1.src = response.kid1;
-	        target2.src = response.kid2;
-	        target3.src = response.kid3;
-	        document.getElementById("submit").disabled = false;},
-	    contentType: "application/json",
-	    dataType: 'json'
+                var target1 = document.getElementById("kid1");
+                var target2 = document.getElementById("kid2");
+                var target3 = document.getElementById("kid3");
+                target0.src = response.original;
+                target1.src = response.kid1;
+                target2.src = response.kid2;
+                target3.src = response.kid3;
+                document.getElementById("submit").disabled = false;},
+            error: function() {
+                document.getElementById("submit").disabled = false;},
+            contentType: "application/json",
+            dataType: 'json'
         });
     }
   </script>

@@ -16,15 +16,14 @@
 # limitations under the License.
 
 
+from auth_decorator import requires_auth
 from flask import abort
 from flask import Flask
 from flask import jsonify
+from flask import make_response
 from flask import render_template
 from flask import request
-from flask import url_for
 import requests
-
-from auth_decorator import requires_auth
 
 
 app = Flask(__name__)
@@ -46,16 +45,16 @@ def post():
   data = request.get_json()
   strokes = data['strokes']
   model = data['model']
-  if len(strokes) == 0:
-    abort(make_response(jsonify(message="no sample"), 400))
+  if not strokes:
+    abort(make_response(jsonify(message='no sample'), 400))
   result = requests.post(
-               'http://localhost:{}/post'.format(model_ports[model]),
-               json=strokes)
+      'http://localhost:{}/post'.format(model_ports[model]),
+      json=strokes)
   return jsonify(result.json())
 
 
 if __name__ == '__main__':
-  model_ports = {'catbus': 8081, 
+  model_ports = {'catbus': 8081,
                  'elephantpig': 8082,
                  'flamingo': 8083,
                  'owl': 8084}
