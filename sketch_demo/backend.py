@@ -158,7 +158,7 @@ if __name__ == '__main__':
       dest='model_dir',
       default='/opt/sketch_demo/models/catbus/lstm')
 
-  (options, args) = parser.parse_args()
+  options, _ = parser.parse_args()
   port = options.port
   MODEL_DIR = options.model_dir
 
