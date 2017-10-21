@@ -123,9 +123,9 @@ You have to wait around 60secs for the application to finish loading
  
  ![](docs/img/screenshot.png)
 
-There are four class rooms and the machine learning model in each class
- is tranied with a different dataset. As a result, the children in each class
- room tend to draw some specific objects such as cats and buses. You can
- choose the class room from the buttons on the screen.
+There are four classrooms and the machine learning model in each class
+ is tranied with a different dataset. As a result, the children in each 
+ classroom tend to draw some specific objects such as cats and buses. You can
+ choose the classroom from the buttons on the screen.
 
 
